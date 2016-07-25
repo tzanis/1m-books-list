@@ -1,0 +1,104 @@
+<html ng-app="booksApp">
+
+  <head>
+    <script src="http://code.ionicframework.com/nightly/js/ionic.bundle.js?4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="http://code.ionicframework.com/nightly/css/ionic.css">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+
+  <body ng-controller="MainCtrl as main">
+    
+    <div class="loader" id="loading">Loading..</div>
+
+    <!-- Header -->
+    <ion-header-bar class="bar-light">
+      <h1 class="title">World's favourite 1M book list!</h1>
+      <div>
+        <span class="halloween indicator"></span> Halloween 
+        <span class="last-friday indicator"></span> Books on finance, published on last friday of the month 
+      </div>
+    </ion-header-bar>
+    <!-- /Header -->
+
+    <!-- Sub-header -->
+    <ion-header-bar class="bar bar-subheader bar-dark">
+      <div class="wrapper">
+        <div class="row">
+          <div class="col sortable" ng-class="{'active-sorting': main.orderBy == 'name' || main.orderBy == '-name'}" ng-click="main.setOrder('name')" >
+            Book Name <span class="ion-funnel"></span>
+          </div>
+          <div class="col">Genre </span></div>
+          <div class="col sortable" ng-class="{'active-sorting': main.orderBy == 'authorName' || main.orderBy == '-author.gender'}" ng-click="main.setOrder('authorName')" >
+            Author Name <span class="ion-funnel"></span>
+          </div>
+          <div class="col">Author Gender</div>
+          <div class="col">Publish Date</div>
+        </div>
+      </div>
+    </ion-header-bar>
+    <!-- /Sub-header -->
+
+    <!-- Main content -->
+    <ion-content class="wrapper">
+
+      <ion-list ng-show="!main.isLoading">
+
+        <ion-item item-width="100%" item-height="75px" collection-repeat="book in main.filteredBooks" ng-class="{halloween: main.isHalloween( book.publishDate ) ,'last-friday': main.isLastFridayForMonth( book.publishDate ) && book.genre == 'finance' }">
+
+          <div class="row">
+            <div class="col">{{book.name}}</div>
+            <div class="col">{{book.genre}}</div>
+            <div class="col">{{book.author.name}}</div>
+            <div class="col">{{(book.author.gender == 'm')?'Male':'Female'}}</div>
+            <div class="col">{{book.publishDate.format("MMM, Do YYYY") }}</div>
+          </div>
+          
+        </ion-item>
+
+      </ion-list>
+
+    </ion-content>
+    <!-- /Main content -->
+
+    <!-- Footer -->
+    <ion-footer-bar class="bar-positive">
+      
+      <div class="wrapper">
+
+        <h2>Filters:</h2>
+        
+        <form class="form-inline">
+
+          <div class="form-group">
+            <label for="exampleInputName2">Book Genre:</label>
+            <input type="text" class="form-control input-sm" id="genreFilter" placeholder="ie: horror"/>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail2">Author Gender:</label>
+            <select class="form-control" id="genderFilter">
+              <option value="">Select..</option>
+              <option value="m">Male</option> 
+              <option value="f">Female</option>
+            </select>
+          </div>
+
+          <div class="form-group">&ensp;
+            <button class="button button-dark form-control" ng-click="main.filterBooks()">Apply filters</button>
+          </div>
+
+        </form>
+           
+      </div>
+    </ion-footer-bar>
+    <!-- /Footer -->
+
+  </body>
+
+</html>
