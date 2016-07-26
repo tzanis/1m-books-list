@@ -1,6 +1,6 @@
 # 1M Book list app
 ## About
-This is a simple angularJS application demonstrating a scrollable list of `1M books` with sorting and filtering features using `colection-repeat` from ionic project for the long list scrolling.
+This is a simple angularJS application demonstrating a scrollable list of `1M books` with sorting and filtering features using `collection-repeat` from ionic project for the long list scrolling.
 
 ## Instructions 
 Just open index.html. No other step is required.
