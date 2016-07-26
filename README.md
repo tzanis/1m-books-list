@@ -10,3 +10,6 @@ Just open index.html. No other step is required.
 - Use the filtering options on the footer and click on "Apply filters" to filter by Author's gender.
 - Books in the "finance" genre, published on the last Friday of any month will are indicated by blue color.
 - Books in the "horror" genre, published on Halloween are indicated by yellow color.
+
+## Online demo 
+Visit: http://www.palioudakis.com/1m-books-list
